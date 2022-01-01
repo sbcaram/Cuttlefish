@@ -11,6 +11,7 @@ CNN (Convolutional Neural Network )
 ## Model 1 
 
 Model: CNNEmotions.mlmodel
+Can Be found at: https://drive.google.com/file/d/1fev4EQvKWtuDsDCvYXEZwnmZzKrBcdUT/view?usp=sharing
 
 ### Credits
 Author: Bogdan Razvan
@@ -25,6 +26,7 @@ Website:
 ## Model 2
 
 Model: Priya_model_v6.mlmodel
+Can be found at: https://drive.google.com/file/d/1aNjyCMWeKrKNKhutp-ciLA6qjUPpJRJx/view?usp=sharing
 
 
 ### Credits
