@@ -34,11 +34,6 @@ DerivedData/
 timeline.xctimeline
 playground.xcworkspace
 
-
-## Machine Learning Models
-*.mlmodel
-
-
 # Swift Package Manager
 #
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
@@ -52,6 +47,9 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+
+## Ignore Machine Learning Models - they are too big
+*.mlmodel
 
 # CocoaPods
 #

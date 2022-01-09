@@ -9,12 +9,14 @@ import SwiftUI
 import ARKit
 import Vision
 import UIKit
+import MLKit
 
 struct ContentView: View {
     
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
     @State private var isImagePickerDisplay = false
+    @State private var showingAlert = false
     
     //    @State private var selection: Tab = .featured
     var image = UIImage()
@@ -29,6 +31,9 @@ struct ContentView: View {
     //        case featured
     //        case list
     //    }
+    
+    @State var alertTitleText = ""
+    @State var alertMessageText = ""
     
     var body: some View {
         //        PictureProcess(image: Image("SophiaSmiling"))
@@ -67,6 +72,11 @@ struct ContentView: View {
             .navigationBarTitle("Demo")
             .sheet(isPresented: self.$isImagePickerDisplay) {
                 ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
+            }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text(alertTitleText),
+                      message: Text(alertMessageText),
+                      dismissButton: .default(Text("OK")))
             }
         
         }
@@ -185,6 +195,109 @@ struct ContentView: View {
         
         return result
     }
+    
+    func detectFacesViaGoogle(uiImage: UIImage) {
+
+      // Create a face detector with options.
+      // [START config_face]
+      let options = FaceDetectorOptions()
+      options.landmarkMode = .all
+      options.classificationMode = .all
+      options.performanceMode = .accurate
+      options.contourMode = .all
+      // [END config_face]
+      // [START init_face]
+      let faceDetector = FaceDetector.faceDetector(options: options)
+      // [END init_face]
+      // Initialize a `VisionImage` object with the given `UIImage`.
+      let visionImage = VisionImage(image: uiImage)
+      visionImage.orientation = uiImage.imageOrientation
+
+      // [START detect_faces]
+      faceDetector.process(visionImage) { faces, error in
+        guard error == nil, let faces = faces, !faces.isEmpty else {
+          // [START_EXCLUDE]
+          let errorString = error?.localizedDescription ?? "No Faces Found"
+          detailText = "Error Occurred: \(errorString)"
+          // [END_EXCLUDE]
+            
+          // If in Foreground - send an alert
+          showAlert(titleText: "Cuttlefish Eyes In-App", messageText: "No Faces Found")
+            
+          return
+        }
+
+        // Faces detected
+        
+        // 1st face
+        let face = faces[0]
+        let headEulerAngleX = face.hasHeadEulerAngleX ? face.headEulerAngleX.description : "NA"
+        let headEulerAngleY = face.hasHeadEulerAngleY ? face.headEulerAngleY.description : "NA"
+        let headEulerAngleZ = face.hasHeadEulerAngleZ ? face.headEulerAngleZ.description : "NA"
+        let leftEyeOpenProbability = face.hasLeftEyeOpenProbability ? face.leftEyeOpenProbability.description : "NA"
+        let rightEyeOpenProbability = face.hasRightEyeOpenProbability ? face.rightEyeOpenProbability.description : "NA"
+        let smilingProbability = face.hasSmilingProbability ? face.smilingProbability.description : "NA"
+        let output = """
+        Frame: \(face.frame)
+        Head Euler Angle X: \(headEulerAngleX)
+        Head Euler Angle Y: \(headEulerAngleY)
+        Head Euler Angle Z: \(headEulerAngleZ)
+        Left Eye Open Probability: \(leftEyeOpenProbability)
+        Right Eye Open Probability: \(rightEyeOpenProbability)
+        Smiling Probability: \(smilingProbability)
+        """
+          
+          if (face.hasSmilingProbability) {
+              emotionText = "Smiling"
+              
+              let confidenceRawData = face.smilingProbability.description
+              let confidenceRawFloat = Float(confidenceRawData) ?? Float(-99)
+              let confidenceFloatBy100 = confidenceRawFloat * 100
+              let confidenceStringForDisplay = String(format: "%.6f", confidenceFloatBy100)
+              
+              confidenceText = confidenceStringForDisplay
+              
+              if (confidenceRawFloat < 0.5) {
+                  showAlert(titleText: "Cuttlefish Eyes In-App", messageText: "BE AWARE - Person NOT Smiling strongly")
+              }
+          } else {
+              emotionText = "NOT smiling"
+              
+              showAlert(titleText: "Cuttlefish Eyes In-App", messageText: "BE AWARE - Person NOT Smiling")
+          }
+          
+          detailText = output
+        // [END_EXCLUDE]
+      }
+      // [END detect_faces]
+    }
+    
+    func showAlert(titleText: String, messageText: String) {
+        alertTitleText = titleText
+        alertMessageText = messageText
+        showingAlert = true
+    }
+    
+//    func sendTestNotification() {
+//
+//        // lock notification - make sure to have phone locked to see this
+//        let content = UNMutableNotificationContent()
+//        content.title = "Cuttlefish Test Notification"
+//        content.subtitle = "Beware of the eyes...."
+//        content.sound = UNNotificationSound.default
+//
+//        // show this notification five seconds from now
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//
+//        // choose a random identifier
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//        // add our notification request
+//        UNUserNotificationCenter.current().add(request)
+//
+//        // If in Foreground - send an alert
+//        showAlert(titleText: "Cuttlefish Test Notification In-App", messageText: "Beware of the eyes....")
+//    }
     
     struct EmotionResults {
         var emotionText: String

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DC0290EE8F5B224C5B68BBB /* libPods-Cuttlefish.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CBA0F30843950BA83C4679 /* libPods-Cuttlefish.a */; };
 		87252BDE275857D400D575B6 /* PhotoAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87252BDD275857D400D575B6 /* PhotoAccess.swift */; };
 		87BBC0342751176B00891B71 /* CuttlefishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBC0332751176B00891B71 /* CuttlefishApp.swift */; };
 		87BBC0362751176B00891B71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBC0352751176B00891B71 /* ContentView.swift */; };
@@ -64,6 +65,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		38CBA0F30843950BA83C4679 /* libPods-Cuttlefish.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cuttlefish.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8706316A278B9DB900B57B0C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		87252BDC275854E800D575B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		87252BDD275857D400D575B6 /* PhotoAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAccess.swift; sourceTree = "<group>"; };
 		87BBC0302751176B00891B71 /* Cuttlefish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuttlefish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +111,8 @@
 		87D8F4AD275430BB00D14B1F /* SophiaSmiling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SophiaSmiling.swift; sourceTree = "<group>"; };
 		87D8F4B227543C5600D14B1F /* CNNEmotions.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CNNEmotions.mlmodel; sourceTree = "<group>"; };
 		87DC587F277665E6009821F7 /* model_v6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = model_v6.mlmodel; sourceTree = "<group>"; };
+		A8AC122BA299248FADCC3750 /* Pods-Cuttlefish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuttlefish.release.xcconfig"; path = "Target Support Files/Pods-Cuttlefish/Pods-Cuttlefish.release.xcconfig"; sourceTree = "<group>"; };
+		C69F658DF1671547BE24559D /* Pods-Cuttlefish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuttlefish.debug.xcconfig"; path = "Target Support Files/Pods-Cuttlefish/Pods-Cuttlefish.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,18 +120,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DC0290EE8F5B224C5B68BBB /* libPods-Cuttlefish.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		846919EBCE9720DF4E43962D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38CBA0F30843950BA83C4679 /* libPods-Cuttlefish.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		87BBC0272751176B00891B71 = {
 			isa = PBXGroup;
 			children = (
+				8706316A278B9DB900B57B0C /* Podfile */,
 				87D0A84B277F700100EC6890 /* README.md */,
 				87BBC0322751176B00891B71 /* Landscapes */,
 				87BBC0312751176B00891B71 /* Products */,
+				A606859ADE54E1DE2779087E /* Pods */,
+				846919EBCE9720DF4E43962D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -291,6 +308,15 @@
 			path = MLModels;
 			sourceTree = "<group>";
 		};
+		A606859ADE54E1DE2779087E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C69F658DF1671547BE24559D /* Pods-Cuttlefish.debug.xcconfig */,
+				A8AC122BA299248FADCC3750 /* Pods-Cuttlefish.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,10 +324,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 87BBC0542751176D00891B71 /* Build configuration list for PBXNativeTarget "Cuttlefish" */;
 			buildPhases = (
+				134D7882703353F484672283 /* [CP] Check Pods Manifest.lock */,
 				87BBC02C2751176B00891B71 /* Sources */,
 				87BBC02D2751176B00891B71 /* Frameworks */,
 				87BBC02E2751176B00891B71 /* Resources */,
 				87BBC0EE2752FCBF00891B71 /* Embed Watch Content */,
+				8024012E0ED0998A35485032 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -358,6 +386,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		134D7882703353F484672283 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cuttlefish-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8024012E0ED0998A35485032 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cuttlefish/Pods-Cuttlefish-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cuttlefish/Pods-Cuttlefish-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuttlefish/Pods-Cuttlefish-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		87BBC02C2751176B00891B71 /* Sources */ = {
@@ -527,6 +597,7 @@
 		};
 		87BBC0552751176D00891B71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C69F658DF1671547BE24559D /* Pods-Cuttlefish.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -559,6 +630,7 @@
 		};
 		87BBC0562751176D00891B71 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8AC122BA299248FADCC3750 /* Pods-Cuttlefish.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
